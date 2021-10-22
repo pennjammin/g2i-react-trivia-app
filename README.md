@@ -1,4 +1,6 @@
-# G2i Trivia Code Challenge 
+# G2i Trivia Code Challenge
+
+The main goal was to do this quick so I used create-react-app and I would usually use Styled Components but have been having fun with tailwind lately.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
