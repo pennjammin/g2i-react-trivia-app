@@ -1,6 +1,7 @@
 import React from 'react';
 
-export default function ResultPage() {
+//Answer page
+export default function AnswerPage() {
     return (
         <div>
             Hello answer.

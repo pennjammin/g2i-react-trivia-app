@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import AnswerPage from '../components/pages/AnswerPage';
+import AnswerPage from '../components/pages/Answer/AnswerPage';
 
 test('Render and start AnswerPage', () => {
     render(
