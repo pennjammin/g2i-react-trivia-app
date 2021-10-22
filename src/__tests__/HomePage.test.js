@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import HomePage from '../components/pages/HomePage';
+import HomePage from '../components/pages/Home/HomePage';
 
 test('Render and start HomePage', () => {
     render(
