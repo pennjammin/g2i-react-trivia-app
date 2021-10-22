@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function HomePage() {
+export default function ResultPage() {
     return (
         <div>
-            Hello there.
+            Hello answer.
         </div>
     );
 }
