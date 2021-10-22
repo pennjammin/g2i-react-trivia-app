@@ -1,11 +1,21 @@
 import React from 'react';
+import he from 'he';
 
 import Container from '../../Container';
 
-//react-query for the win
+//react-query will be used to async fetch the data
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnmount: false,
+      refetchOnReconnect: false,
+      retry: false
+    },
+  },
+})
 
 //This is where the quiz shall be
 export default function QuizPage() {
@@ -24,7 +34,7 @@ function QuizQuery() {
  
       fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean').then(res =>
  
-        res.json()
+        (res.json())
  
       )
     );
@@ -40,7 +50,7 @@ function QuizQuery() {
     return (
       <Container>
         <h1 className='text-3xl font-bold m-10'>{data.results[0].category}</h1>
-        <div>{data.results[0].question}</div>
+        <div>{he.decode(data.results[0].question)}</div>
         <div class="inline-flex space-x-8">
           <button class="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4">
             True
