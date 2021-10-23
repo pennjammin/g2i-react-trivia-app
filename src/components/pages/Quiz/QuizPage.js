@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import he from 'he';
+import { useHistory } from 'react-router-dom';
 
 import Container from '../../Container';
 
 //react-query will be used to async fetch the data
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
@@ -30,37 +31,66 @@ export default function QuizPage() {
 
 function QuizQuery() {
 
-    const { isLoading, error, data } = useQuery('quizData', () =>
- 
-      fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean').then(res =>
- 
-        (res.json())
- 
-      )
-    );
- 
-    if (isLoading) return (
-        <Container>
-            Loading...
-        </Container>
-    );
- 
-    if (error) return 'An error has occurred: ' + error.message;
- 
-    return (
+  const [count, setCount] = useState(0);
+  const [correct, setCorrect] = useState(0);
+
+
+  let history = useHistory();
+
+  const { isLoading, error, data } = useQuery('quizData', () =>
+
+    fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean').then(res =>
+
+      (res.json())
+
+    )
+  );
+
+  if (isLoading) return (
       <Container>
-        <h1 className='text-3xl font-bold m-10'>{data.results[0].category}</h1>
-        <div>{he.decode(data.results[0].question)}</div>
-        <div class="inline-flex space-x-8">
-          <button class="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4">
-            True
-          </button>
-          <button class="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4 ">
-            False
-          </button>
-        </div>
-        <div>{0 + 1} of 10</div>
+          Loading...
       </Container>
-    );
- 
-  }
+  );
+
+  if (error) return 'An error has occurred: ' + error.message;
+
+  return (
+    <Container>
+      <h1 className='text-3xl font-bold m-10'>{data.results[count].category}</h1>
+      <div>{he.decode(data.results[count].question)}</div>
+      <div className="inline-flex space-x-8">
+      <button 
+          className="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4"
+          onClick = {()=> {
+            setCount(count + 1);
+            if(count == 9){
+              history.push( '/answer' )
+            }
+            if(data.results[count].correct_answer == 'True'){
+              setCorrect(correct + 1);
+            }
+        }}
+      >
+          True
+      </button>
+      <button 
+          className="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4 "
+          onClick = {()=> {
+            setCount(count + 1);
+            if(count == 9){
+              history.push( '/answer' )
+            }
+            if(data.results[count].correct_answer == 'False'){
+              setCorrect(correct + 1);
+            }
+        }}
+      >
+          False
+      </button>
+      </div>
+      <div>{count + 1} of 10</div>
+      <div>{correct + 1} of 10</div>
+    </Container>
+  );
+
+}
