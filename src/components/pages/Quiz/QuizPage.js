@@ -57,7 +57,7 @@ function QuizQuery() {
   return (
     <Container>
       <h1 className='text-3xl font-bold m-10'>{data.results[count].category}</h1>
-      <div>{he.decode(data.results[count].question)}</div>
+      <div className='outline-black p-10'>{he.decode(data.results[count].question)}</div>
       <div className="inline-flex space-x-8">
       <button 
           className="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4"

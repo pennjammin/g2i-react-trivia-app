@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Conatiner from '../../Container';
 
-//Home page, went with tailwind for now, not as good readability as SC
+//Home page button
 export default function HomePage() {
     return (
         <Conatiner>
