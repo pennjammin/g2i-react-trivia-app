@@ -4,7 +4,6 @@ import HomeButton from './HomeButton';
 import Wrapper from '../../Wrapper'
 
 //Home page, went with tailwind for now
-//is it as good as styled components?
 export default function HomePage() {
     return (
         <Wrapper>
