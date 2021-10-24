@@ -13,18 +13,18 @@ import HomePage from './components/pages/Home/HomePage.js';
 
 export default function App() {
   return(
-  <Router>
-    <Switch>
-      <Route path="/quiz">
-        <QuizPage />
-      </Route>
-      <Route path="/answer">
-        <AnswerPage />
-      </Route>
-      <Route path="/">
-        <HomePage />
-      </Route>
-    </Switch>
-  </Router>
+    <Router>
+      <Switch>
+        <Route path="/quiz">
+          <QuizPage />
+        </Route>
+        <Route path="/answer">
+          <AnswerPage />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
