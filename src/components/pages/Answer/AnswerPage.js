@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation } from "react-router-dom";
 import he from 'he';
 
@@ -16,7 +16,7 @@ export default function AnswerPage() {
     let answers = [];
 
     if(data){
-        for (const [key, value] of Object.entries(data?.results)) {
+        for (const [, value] of Object.entries(data?.results)) {
             questions.push(value.question)
             answers.push(value.correct_answer.toLowerCase());
         }
