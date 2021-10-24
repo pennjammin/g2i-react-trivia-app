@@ -32,7 +32,7 @@ export default function QuizPage() {
 function QuizQuery() {
 
   const [count, setCount] = useState(0);
-  const [correct, setCorrect] = useState(0);
+  const [correct, setCorrect] = useState(0);//correct for falisty as the latter logic, adding one in history hook
 
 
   let history = useHistory();
@@ -62,29 +62,35 @@ function QuizQuery() {
       <button 
           className="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4"
           onClick = {()=> {
-            setCount(count + 1);
-            if(count == 9){
-              history.push( '/answer' )
-            }
-            if(data.results[count].correct_answer == 'True'){
+            if(data.results[count].correct_answer === 'True'){
               setCorrect(correct + 1);
             }
-        }}
-      >
+            setCount(count + 1);
+
+            if(count === data.results.length - 1){
+              history.push( {
+                pathname: '/answer',
+                state: { correctAnswers: correct + 1}
+              } )
+            }
+        }}>
           True
       </button>
       <button 
           className="bg-black hover:bg-gray-300 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4 "
           onClick = {()=> {
-            setCount(count + 1);
-            if(count == 9){
-              history.push( '/answer' )
-            }
-            if(data.results[count].correct_answer == 'False'){
+            if(data.results[count].correct_answer === 'False'){
               setCorrect(correct + 1);
             }
-        }}
-      >
+            setCount(count + 1);
+
+            if(count === data.results.length - 1){
+              history.push( {
+                pathname: '/answer',
+                state: { correctAnswers: correct }
+              } )
+            }
+        }}>
           False
       </button>
       </div>

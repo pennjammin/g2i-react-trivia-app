@@ -9,7 +9,7 @@ export default function HomePage() {
     return (
         <Wrapper>
             <div className='text-4xl font-bold m-10'>
-                <p>Welcome to the Trivia Challenge!</p>
+                <h1>Welcome to the Trivia Challenge!</h1>
             </div>
             <div className='text-xl'>
                 <p>You will be presented with 10 true or false questions.</p>

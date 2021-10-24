@@ -1,42 +1,47 @@
-import React from 'react';
-import { queryClient } from '../Quiz/QuizPage';
+import React, { useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 import he from 'he';
 
+import { queryClient } from '../Quiz/QuizPage';
 import AnswerItem from './AnswerItem';
 import AgainButton from './AgainButton';
 
 //Answer page where we snag the cached query
 export default function AnswerPage() {
     const data = queryClient.getQueryData("quizData");
+
+    const location = useLocation();
+
     let questions = [];
     let answers = [];
-    let correct = 0;
 
     if(data){
         for (const [key, value] of Object.entries(data?.results)) {
             questions.push(value.question)
             answers.push(value.correct_answer.toLowerCase());
-            if(value.correct_answer == 'True') correct++;
         }
     }
 
     return (
         <div className='text-center'>
-            <div className='text-4xl my-6'>
+            <h1 className='text-4xl my-3'>
                 You Scored
-            </div>
-            <div className='text-2xl font-bold'>
-                {correct}/10
-            </div>
-            {questions.map((item, index) => {
-                let checkAnswer = 'true' === answers[ index ];
+            </h1>
+            <h2 className='text-2xl font-bold my-6'>
+                {location.state?.correctAnswers}/10
+            </h2>
+            <ul>
+                {questions.map((item, index) => {
+                    let checkAnswer = 'true' === answers[ index ];
 
-                return (<
-                    AnswerItem
-                    isCorrect={checkAnswer}
-                    questionText={he.decode(item)}
-                />)
-            })}
+                    return (<
+                        AnswerItem
+                        isCorrect={checkAnswer}
+                        questionText={he.decode(item)}
+                        key={index}
+                    />)
+                })}
+            </ul>
             <AgainButton />
         </div>
     );
