@@ -3,6 +3,7 @@ import { queryClient } from '../Quiz/QuizPage';
 import he from 'he';
 
 import AnswerItem from './AnswerItem';
+import AgainButton from './AgainButton';
 
 //Answer page where we snag the cached query
 export default function AnswerPage() {
@@ -36,6 +37,7 @@ export default function AnswerPage() {
                     questionText={he.decode(item)}
                 />)
             })}
+            <AgainButton />
         </div>
     );
 }
