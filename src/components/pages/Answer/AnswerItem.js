@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function AnswerItem() {
+export default function AnswerItem( { questionText, isCorrect } ) {
     return (
         <div data-testid="scorecard__item">
             <p>{ isCorrect ? '+' : '-' } { questionText }</p>
@@ -9,12 +9,12 @@ export default function AnswerItem() {
     );
 }
 
-ScoreCardItem.propTypes = {
+AnswerItem.propTypes = {
     questionText: PropTypes.string,
     isCorrect: PropTypes.bool
 }
 
-ScoreCardItem.defaultProps = {
+AnswerItem.defaultProps = {
     questionText: '',
     isCorrect: false,
 }

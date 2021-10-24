@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
 import { queryClient } from '../Quiz/QuizPage';
+import he from 'he';
 
-import Container from '../../Container';
+import AnswerItem from './AnswerItem';
 
-//Answer page
+//Answer page where we snag the cached query
 export default function AnswerPage() {
     const data = queryClient.getQueryData("quizData");
+    let questions = [];
+    //let correct = ;
 
+    if(data){
+        for (const [key, value] of Object.entries(data?.results)) {
+            questions.push(value.question)
+        }
+    }
 
     return (
-        <Container>
-            <p className='text-4xl'>
+        <div className='text-center'>
+            <div className='text-4xl'>
                 You Scored
-                {data?.results[0].correct_answer}
-            </p>
-        </Container>
+            </div>
+            {questions.map(item => {
+                return (<
+                    AnswerItem
+                    questionText={he.decode(item)}
+                />)
+            })}
+            <div className='text-3xl font-bold'>
+            </div>
+        </div>
     );
 }
