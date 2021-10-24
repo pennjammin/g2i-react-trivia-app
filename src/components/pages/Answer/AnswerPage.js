@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { queryClient } from '../Quiz/QuizPage';
 import he from 'he';
 
@@ -8,27 +8,34 @@ import AnswerItem from './AnswerItem';
 export default function AnswerPage() {
     const data = queryClient.getQueryData("quizData");
     let questions = [];
-    //let correct = ;
+    let answers = [];
+    let correct = 0;
 
     if(data){
         for (const [key, value] of Object.entries(data?.results)) {
             questions.push(value.question)
+            answers.push(value.correct_answer.toLowerCase());
+            if(value.correct_answer == 'True') correct++;
         }
     }
 
     return (
         <div className='text-center'>
-            <div className='text-4xl'>
+            <div className='text-4xl my-6'>
                 You Scored
             </div>
-            {questions.map(item => {
+            <div className='text-2xl font-bold'>
+                {correct}/10
+            </div>
+            {questions.map((item, index) => {
+                let checkAnswer = 'true' === answers[ index ];
+
                 return (<
                     AnswerItem
+                    isCorrect={checkAnswer}
                     questionText={he.decode(item)}
                 />)
             })}
-            <div className='text-3xl font-bold'>
-            </div>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function AnswerItem( { questionText, isCorrect } ) {
     return (
-        <div data-testid="scorecard__item">
+        <div className='m-8'>
             <p>{ isCorrect ? '+' : '-' } { questionText }</p>
         </div>
     );

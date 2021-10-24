@@ -48,7 +48,7 @@ function QuizQuery() {
 
   if (isLoading) return (
       <Container>
-          Loading...
+          <p className='my-10 font-bold text-5xl'>Loading...</p>
       </Container>
   );
 
@@ -89,7 +89,6 @@ function QuizQuery() {
       </button>
       </div>
       <div>{count + 1} of 10</div>
-      <div>{correct + 1} of 10</div>
     </Container>
   );
 
