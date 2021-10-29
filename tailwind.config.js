@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       outline: {
-        black: ['2px solid #000000', '-20px']
+        black: ['2px solid #000000', '-25px']
       }
     },
   },
