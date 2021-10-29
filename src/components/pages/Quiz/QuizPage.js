@@ -16,23 +16,23 @@ export const queryClient = new QueryClient({
       retry: false
     },
   },
-})
+});
 
 //This is where the quiz shall be
 export default function QuizPage() {
-    return (
-        <QueryClientProvider client={queryClient}>
+  return (
+    <QueryClientProvider client={queryClient}>
 
-            <QuizQuery />
+      <QuizQuery />
 
-        </QueryClientProvider>
-    );
+    </QueryClientProvider>
+  );
 }
 
 function QuizQuery() {
 
   const [count, setCount] = useState(0);
-  const [correct, setCorrect] = useState(0);//correct for falisty as the latter logic, adding one in history hook
+  const [correct, setCorrect] = useState(0);
 
 
   let history = useHistory();
@@ -97,5 +97,4 @@ function QuizQuery() {
       <div>{count + 1} of 10</div>
     </Container>
   );
-
-}
+};
